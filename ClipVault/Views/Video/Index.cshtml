@@ -1,0 +1,18 @@
+﻿@model List<Video>
+
+<div class="container-medium">
+	<div class="row">
+
+		@foreach (var video in Model)
+		{
+			<div class="col-md-3 mb-4">
+				<a href="@video.VideoUrl" target="_blank">
+					<div class="card shadow-sm border-0 rounded-3 overflow-hidden">
+						<img src="@video.ThumbnailUrl" class="card-img-top" />
+					</div>
+				</a>
+			</div>
+		}
+
+	</div>
+</div>
