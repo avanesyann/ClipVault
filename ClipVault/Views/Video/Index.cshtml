@@ -1,6 +1,12 @@
 ﻿@model List<Video>
 
 <div class="container-medium">
+	<div class="row mb-3">
+		<div class="col text-end">
+			<a class="btn btn-primary" asp-controller="Video" asp-action="Create">Add Video</a>
+		</div>
+	</div>
+
 	<div class="row">
 
 		@foreach (var video in Model)
