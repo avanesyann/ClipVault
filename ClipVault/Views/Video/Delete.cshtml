@@ -1,0 +1,15 @@
+﻿@model ClipVault.Models.Video
+
+<h2>Delete Video</h2>
+
+<h4>Are you sure you want to delete this video?</h4>
+<div>
+    <strong>@Model.Title</strong>
+    <p>@Model.Description</p>
+</div>
+
+<form method="post">
+    <input type="hidden" asp-for="Id" />
+    <button type="submit" class="btn btn-danger">Delete</button>
+    <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+</form>
