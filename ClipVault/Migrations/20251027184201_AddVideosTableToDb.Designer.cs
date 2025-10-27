@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ClipVault.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20251025170210_AddVideosTableToDb")]
+    [Migration("20251027184201_AddVideosTableToDb")]
     partial class AddVideosTableToDb
     {
         /// <inheritdoc />
@@ -37,6 +37,9 @@ namespace ClipVault.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.PrimitiveCollection<string>("Tags")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ThumbnailUrl")

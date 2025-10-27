@@ -11,12 +11,31 @@
 
 		@foreach (var video in Model)
 		{
+			@* <div class="col-md-3 mb-4"> *@
+			@* 	<a href="@video.VideoUrl" target="_blank"> *@
+			@* 		<div class="card shadow-sm border-0 rounded-3 overflow-hidden"> *@
+			@* 			<img src="@video.ThumbnailUrl" class="card-img-top" /> *@
+			@* 		</div> *@
+			@* 	</a> *@
+			@* </div> *@
+
 			<div class="col-md-3 mb-4">
-				<a href="@video.VideoUrl" target="_blank">
-					<div class="card shadow-sm border-0 rounded-3 overflow-hidden">
-						<img src="@video.ThumbnailUrl" class="card-img-top" />
+				<div class="card shadow-sm">
+					<img src="@video.ThumbnailUrl" class="card-img-top" alt="@video.Title" />
+					<div class="card-body">
+						<h5 class="card-title">@video.Title</h5>
+						<p class="card-text text-muted">@video.Description</p>
+						<p class="small">Tags: @(video.Tags != null && video.Tags.Any() 
+													? string.Join(", ", video.Tags) 
+													: "")</p>
+						<div class="d-flex justify-content-between">
+							<a href="@video.VideoUrl" target="_blank" class="btn btn-sm btn-success">Watch</a>
+							<a asp-action="Edit" asp-route-id="@video.Id" class="btn btn-sm btn-warning">Edit</a>
+							<a asp-action="Details" asp-route-id="@video.Id" class="btn btn-sm btn-info">Details</a>
+							<a asp-action="Delete" asp-route-id="@video.Id" class="btn btn-sm btn-danger">Delete</a>
+						</div>
 					</div>
-				</a>
+				</div>
 			</div>
 		}
 
