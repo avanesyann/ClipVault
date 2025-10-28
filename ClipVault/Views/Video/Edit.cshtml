@@ -1,0 +1,40 @@
+﻿@model Video
+
+<form method="post">
+    <div class="border p-3 mt-4">
+        <div class="row">
+            <div class="col-6">
+                <h2 class="text-dark">Add Video</h2>
+            </div>
+
+            <hr />
+        </div>
+        <div class="mb-3 row p-1">
+            <label asp-for="VideoUrl" class="text-secondary p-0"></label>
+            <input asp-for="VideoUrl" type="text" class="form-control" />
+        </div>
+        <div class="mb-3 row p-1">
+            <label asp-for="ThumbnailUrl" class="text-secondary p-0"></label>
+            <input asp-for="ThumbnailUrl" type="text" class="form-control" />
+        </div>
+        <div class="mb-3 row p-1">
+            <label asp-for="Tags"></label>
+            <input asp-for="Tags" class="form-control" placeholder="Comma-separated (e.g. 3D, 2D)" />
+        </div>
+        <div class="mb-3 row p-1">
+            <label asp-for="Title" class="text-secondary p-0"></label>
+            <input asp-for="Title" type="text" class="form-control" />
+        </div>
+        <div class="mb-3 row p-1">
+            <label asp-for="Description" class="text-secondary p-0"></label>
+            <input asp-for="Description" type="text" class="form-control" />
+        </div>
+
+        <div class="row">
+            <button type="submit" class="btn btn-dark" style="width: 150px;">Edit</button>
+            <div class="col-6">
+                <a asp-controller="Video" asp-action="Index" class="btn btn-light"><i class="bi bi-caret-left-fill"></i> Go back</a>
+            </div>
+        </div>
+    </div>
+</form>

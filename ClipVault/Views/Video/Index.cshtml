@@ -25,7 +25,7 @@
 					<div class="card-body">
 						<h5 class="card-title">@video.Title</h5>
 						<p class="card-text text-muted">@video.Description</p>
-						<p class="small">Tags: @(video.Tags != null && video.Tags.Any() 
+						<p class="card-tags small">Tags: @(video.Tags != null && video.Tags.Any() 
 													? string.Join(", ", video.Tags) 
 													: "")</p>
 						<div class="d-flex justify-content-between">

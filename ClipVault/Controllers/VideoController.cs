@@ -36,6 +36,31 @@ namespace ClipVault.Controllers
             return View();
         }
 
+        public IActionResult Edit(int id)
+        {
+            if (id == null || id == 0)
+                return NotFound();
+
+            Video? video = _context.Videos.Find(id);
+
+            if (video == null)
+                return NotFound();
+
+            return View(video);
+        }
+
+        [HttpPost]
+        public IActionResult Edit(Video obj)
+        {
+            if (ModelState.IsValid)
+            {
+                _context.Videos.Update(obj);
+                _context.SaveChanges();
+                return RedirectToAction("Index", "Video");
+            }
+
+            return View();
+        }
 
         public IActionResult Delete(int id)
         {
