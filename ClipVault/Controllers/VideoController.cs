@@ -36,7 +36,7 @@ namespace ClipVault.Controllers
             return View();
         }
 
-        public IActionResult Edit(int id)
+        public IActionResult Edit(int? id)
         {
             if (id == null || id == 0)
                 return NotFound();
@@ -46,23 +46,26 @@ namespace ClipVault.Controllers
             if (video == null)
                 return NotFound();
 
+            ViewBag.TagsString = string.Join(", ", video.Tags ?? new List<string>());
             return View(video);
         }
 
         [HttpPost]
-        public IActionResult Edit(Video obj)
+        public IActionResult Edit(Video obj, string TagsString)
         {
             if (ModelState.IsValid)
             {
+                if (!string.IsNullOrEmpty(TagsString))
+                    obj.Tags = TagsString.Split(',').Select(t => t.Trim()).ToList();
+
                 _context.Videos.Update(obj);
                 _context.SaveChanges();
-                return RedirectToAction("Index", "Video");
             }
 
-            return View();
+            return RedirectToAction("Index", "Video");
         }
 
-        public IActionResult Delete(int id)
+        public IActionResult Delete(int? id)
         {
             if (id == null || id == 0)
             {
@@ -81,7 +84,7 @@ namespace ClipVault.Controllers
         [HttpPost, ActionName("Delete")]
         public IActionResult DeletePOST(int id)
         {
-            Video obj = _context.Videos.Find(id);
+            Video? obj = _context.Videos.Find(id);
             if (obj == null)
                 return NotFound();
 
