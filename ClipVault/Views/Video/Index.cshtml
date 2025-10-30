@@ -1,6 +1,23 @@
 ﻿@model List<Video>
 
 <div class="container-medium">
+	<div class="mb-4">
+		<h5>Filter by Tag:</h5>
+		<div class="d-flex flex-wrap gap-2">
+			<a asp-action="Index" class="btn btn-sm @(ViewBag.SelectedTag == null ? "btn-primary" : "btn-outline-primary")">
+				All
+			</a>
+
+			@foreach (var tag in ViewBag.Tags)
+			{
+				<a asp-action="Index" asp-route-tag="@tag"
+				   class="btn btn-sm @(ViewBag.SelectedTag == tag ? "btn-primary" : "btn-outline-primary")">
+					@tag
+				</a>
+			}
+		</div>
+	</div>
+
 	<div class="row mb-3">
 		<div class="col text-end">
 			<a class="btn btn-primary" asp-controller="Video" asp-action="Create">Add Video</a>

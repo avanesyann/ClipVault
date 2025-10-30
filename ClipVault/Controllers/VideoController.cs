@@ -12,9 +12,30 @@ namespace ClipVault.Controllers
         {
             _context = context;
         }
-        public IActionResult Index()
+        public IActionResult Index(string tag)
         {
-            var videos = _context.Videos.ToList();
+            IEnumerable<Video> videos;
+
+            if (!string.IsNullOrEmpty(tag))
+            {
+                tag = tag.ToLower();
+                videos = _context.Videos
+                    .Where(v => v.Tags.Any(t => t.ToLower() == tag))
+                    .ToList();
+            }
+            else
+            {
+                videos = _context.Videos.ToList();
+            }
+
+            ViewBag.Tags = _context.Videos
+                .SelectMany(v => v.Tags)
+                .Distinct()
+                .OrderBy(t => t)
+                .ToList();
+
+            ViewBag.SelectedTag = tag;
+
             return View(videos);
         }
 
