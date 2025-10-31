@@ -1,9 +1,9 @@
 ﻿@model List<Video>
 
 <div class="container-medium">
-	<div class="mb-4">
+	<div class="text-center mb-4">
 		<h5>Filter by Tag:</h5>
-		<div class="d-flex flex-wrap gap-2">
+		<div class="d-inline-flex flex-wrap gap-2 mb-3">
 			<a asp-action="Index" class="btn btn-sm @(ViewBag.SelectedTag == null ? "btn-primary" : "btn-outline-primary")">
 				All
 			</a>
@@ -16,13 +16,13 @@
 				</a>
 			}
 		</div>
-	</div>
-
-	<div class="row mb-3">
-		<div class="col text-end">
-			<a class="btn btn-primary" asp-controller="Video" asp-action="Create">Add Video</a>
+		<div>
+			<a class="btn btn-success" asp-controller="Video" asp-action="Create">
+				+ Add Video
+			</a>
 		</div>
 	</div>
+
 
 	<div class="row">
 
