@@ -114,5 +114,17 @@ namespace ClipVault.Controllers
 
             return RedirectToAction("Index");
         }
+
+        public IActionResult Details(int? id)
+        {
+            if (id == null)
+                return NotFound();
+
+            var video = _context.Videos.FirstOrDefault(v => v.Id == id);
+            if (video == null)
+                return NotFound();
+
+            return View(video);
+        }
     }
 }
