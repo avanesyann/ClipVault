@@ -2,6 +2,14 @@
 
 <div class="container-medium">
 	<div class="text-center mb-4">
+
+		<form method="get" asp-action="Index" class="mb-4">
+			<div class="input-group">
+				<input type="text" name="search" class="form-control" placeholder="Search videos..." value="@ViewBag.SearchQuery" />
+				<button type="submit" class="btn btn-outline-dark">Search</button>
+			</div>
+		</form>
+
 		<h5>Filter by Tag:</h5>
 		<div class="d-inline-flex flex-wrap gap-2 mb-3">
 			<a asp-action="Index" class="btn btn-sm @(ViewBag.SelectedTag == null ? "btn-primary" : "btn-outline-primary")">
