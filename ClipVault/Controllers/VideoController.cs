@@ -12,23 +12,11 @@ namespace ClipVault.Controllers
         {
             _context = context;
         }
-        public IActionResult Index(string tag, string search)
+        public IActionResult Index(List<string> tags, string search)
         {
-            IEnumerable<Video> videos;
+            var videos = _context.Videos.AsQueryable();
 
-            // Filter by tag (your existing code)
-            if (!string.IsNullOrEmpty(tag))
-            {
-                tag = tag.ToLower();
-                videos = _context.Videos
-                    .Where(v => v.Tags.Any(t => t.ToLower() == tag));
-            }
-            else
-            {
-                videos = _context.Videos;
-            }
-
-            // Additional filter: Search by title or description
+            // 🔍 Filter by search
             if (!string.IsNullOrEmpty(search))
             {
                 search = search.ToLower();
@@ -37,7 +25,13 @@ namespace ClipVault.Controllers
                     v.Description.ToLower().Contains(search));
             }
 
-            videos = videos.ToList();
+            // 🏷️ Filter by tags (ALL selected tags must match)
+            if (tags != null && tags.Any())
+            {
+                videos = videos.Where(v => tags.All(tag => v.Tags.Contains(tag)));
+            }
+
+            var result = videos.ToList();
 
             ViewBag.Tags = _context.Videos
                 .SelectMany(v => v.Tags)
@@ -45,11 +39,12 @@ namespace ClipVault.Controllers
                 .OrderBy(t => t)
                 .ToList();
 
-            ViewBag.SelectedTag = tag;
+            ViewBag.SelectedTags = tags ?? new List<string>();
             ViewBag.Search = search;
 
-            return View(videos);
+            return View(result);
         }
+
 
 
         public IActionResult Create()

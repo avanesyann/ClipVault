@@ -1,4 +1,8 @@
 ﻿@model List<Video>
+@{
+	var selectedTags = ViewBag.SelectedTags as List<string>;
+	string searchQuery = ViewBag.Search as string ?? "";
+}
 
 <div class="container-medium">
 	<div class="text-center mb-4">
@@ -18,8 +22,19 @@
 
 			@foreach (var tag in ViewBag.Tags)
 			{
-				<a asp-action="Index" asp-route-tag="@tag"
-				   class="btn btn-sm @(ViewBag.SelectedTag == tag ? "btn-primary" : "btn-outline-primary")">
+				var isSelected = selectedTags.Contains(tag);
+				var newTags = new List<string>(selectedTags);
+
+				if (isSelected)
+					newTags.Remove(tag);
+				else
+					newTags.Add(tag);
+
+				var routeValues = string.Join("&", newTags.Select(t => $"tags={t}"));
+				var url = Url.Action("Index", "Video") + $"?{routeValues}&search={searchQuery}";
+
+				<a href="@url"
+				   class="btn btn-sm @(isSelected ? "btn-primary" : "btn-outline-primary")">
 					@tag
 				</a>
 			}
