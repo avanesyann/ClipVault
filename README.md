@@ -8,8 +8,8 @@ This is a work in progress application, so there's a lot to be added in the futu
 
 ## :sunrise_over_mountains: Project Roadmap
 
-- [ ] Add tags filter
-- [ ] Add search functionality.
+- [X] Add tags filter
+- [X] Add search functionality.
 ...
 
 ## :scroll: License
